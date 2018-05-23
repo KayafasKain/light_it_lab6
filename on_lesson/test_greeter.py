@@ -32,6 +32,8 @@ class GreeterTestCase(unittest.TestCase):
         obj = greeter.Greeter()
         name = "pony"
         test_str = "Good morning, pony"
+        mock_logger.warn(test_str)
+        mock_logger.warn.assert_called_with(obj.greet_time(name))        
         self.assertEqual(obj.greet_time(name), test_str)
 
     @patch("greeter.logging")
@@ -41,8 +43,8 @@ class GreeterTestCase(unittest.TestCase):
         obj = greeter.Greeter()
         name = "pony"
         test_str = "Good evening, pony"
-        mock_logger.logger.info(test_str)
-        mock_logger.logger.info.assert_called_with(obj.greet_time(name))
+        mock_logger.warn(test_str)
+        mock_logger.warn.assert_called_with(obj.greet_time(name))
         self.assertEqual(obj.greet_time(name), test_str)
 
     @patch("greeter.logging")
@@ -52,8 +54,8 @@ class GreeterTestCase(unittest.TestCase):
         obj = greeter.Greeter()
         name = "pony"
         test_str = "Good night, pony"
-        mock_logger.logger.info(test_str)
-        mock_logger.logger.info.assert_called_with(obj.greet_time(name))
+        mock_logger.warn.info(test_str)
+        mock_logger.warn.info.assert_called_with(obj.greet_time(name))
         self.assertEqual(obj.greet_time(name), test_str)
 
 
